@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ingest-dev": "pnpx inngest-cli@latest dev"
   },
   "dependencies": {
     "@inngest/agent-kit": "^0.8.0",

@@ -8,11 +8,27 @@ import UserModel from "@/models/User";
 
 export async function POST(request: NextRequest) {
   const { email, password, skills = [] } = await request.json();
+  if (!email || !password) {
+    return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
+  }
+  const normalizedEmail = email.toLowerCase().trim();
+
+
   try {
+    console.log("Received signup request:", { email, skills });
     await dbConnect();
+    // Check if the user already exists
+    const existingUser = await UserModel.findOne({ email: normalizedEmail });
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "User already exists" },
+        { status: 409 },
+      );
+    }
+    // Validate email and password
     const hashed = await bcrypt.hash(password, 10);
     const user = await UserModel.create({
-      email,
+      normalizedEmail,
       password: hashed,
       skills,
     });
@@ -24,18 +40,9 @@ export async function POST(request: NextRequest) {
         email: user.email,
       },
     });
-
-    const token = jwt.sign(
-      {
-        id: user._id,
-        role: user.role,
-      },
-      process.env.JWT_SECRET || "supersecretkey",
-    );
     return NextResponse.json(
       {
         message: "Signup successful",
-        token,
         user: {
           id: user._id,
           email: user.email,
