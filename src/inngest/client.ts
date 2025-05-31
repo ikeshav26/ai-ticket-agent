@@ -1,7 +1,7 @@
-import { Inngest } from 'inngest';
+import { Inngest } from "inngest";
 
 const inngest = new Inngest({
-    id: 'ticketing-system',
-})
+  id: "ticketing-system",
+});
 
 export default inngest;
