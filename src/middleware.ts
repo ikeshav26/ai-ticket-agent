@@ -1,45 +1,52 @@
-import withAuth from "next-auth/middleware";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+export { default } from "next-auth/middleware";
+import { getToken } from "next-auth/jwt";
 
-export default withAuth(
-  function middleware(req: NextRequest) {
-    return NextResponse.next();
-  },
-  {
-    callbacks: {
-      authorized: ({ token, req }) => {
-        //REVIEW - Auth related paths
-        const { pathname } = req.nextUrl;
-        if (
-          pathname.startsWith("/api/auth") ||
-          pathname == "/login" ||
-          pathname == "/register"
-        ) {
-          return true; // Allow access to authentication routes
-        }
-
-        //public
-
-        if (pathname === "/") {
-          return true; // Allow access to the home page
-        }
-
-        return !!token;
-        //NOTE - You can add more conditions here to restrict access based on user roles
-      },
-    },
+export async function middleware(request: NextRequest) {
+  const token = await getToken({
+    req: request,
     secret: process.env.NEXTAUTH_SECRET,
-  },
-);
+  });
+
+  const url = request.nextUrl;
+
+  if (!token) {
+    if (
+      url.pathname.startsWith("/tickets") ||
+      url.pathname.startsWith("/admin") ||
+      url.pathname.startsWith("/")
+    ) {
+      return NextResponse.redirect(new URL("/signin", request.url));
+    }
+    // Allow access to public pages
+    else if (
+      url.pathname === "/sign-in" ||
+      url.pathname === "/sign-up" ||
+      url.pathname.startsWith("/api/")
+    ) {
+      return NextResponse.next();
+    }
+  } else {
+    if (
+      url.pathname === "/sign-in" ||
+      url.pathname === "/sign-up"
+    ) {
+      return NextResponse.redirect(
+        new URL("/", request.url),
+      );
+    }
+  }
+}
+
 
 export const config = {
   matcher: [
-    //NOTE - ADD paths that should be protected by authentication
     "/",
-    "/dashboard/:path*",
-    "/profile/:path*",
-    "/settings/:path*",
+    "/sign-up",
+    "/sign-in",
+    "/tickets/:path*",
     "/admin/:path*",
-    "/moderator/:path*",
+
   ],
 };

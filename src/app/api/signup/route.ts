@@ -11,14 +11,13 @@ export async function POST(request: NextRequest) {
   if (!email || !password) {
     return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
   }
-  const normalizedEmail = email.toLowerCase().trim();
 
 
   try {
     console.log("Received signup request:", { email, skills });
     await dbConnect();
     // Check if the user already exists
-    const existingUser = await UserModel.findOne({ email: normalizedEmail });
+    const existingUser = await UserModel.findOne({ email: email });
     if (existingUser) {
       return NextResponse.json(
         { error: "User already exists" },
@@ -28,7 +27,7 @@ export async function POST(request: NextRequest) {
     // Validate email and password
     const hashed = await bcrypt.hash(password, 10);
     const user = await UserModel.create({
-      normalizedEmail,
+      email,
       password: hashed,
       skills,
     });

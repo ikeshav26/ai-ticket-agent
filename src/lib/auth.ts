@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
         token.email = user.email;
         token.role = user.role;
         token.skills = user.skills || [];
-        token.createdAt = user.createdAt.toISOString(); // Convert Date to string
+        token.createdAt = user.createdAt // Convert Date to string
       }
       return token;
     },

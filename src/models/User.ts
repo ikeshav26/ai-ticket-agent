@@ -22,11 +22,11 @@ const userSchema = new mongoose.Schema<IUser>({
     type: String,
     default: "user",
     enum: ["user", "moderator", "admin"],
-    skills: [String],
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+  },
+  skills: [String],
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 

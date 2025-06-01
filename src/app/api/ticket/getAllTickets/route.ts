@@ -21,14 +21,12 @@ export const GET = async (req: NextRequest) => {
         .sort({ createdAt: -1 });
     }
     if (token.role === "moderator") {
-      tickets = await TicketModel.find({ assignedTo: token.userId })
+      tickets = await TicketModel.find({ assignedTo: token._id })
         .populate("assignedTo", ["email", "_id"])
         .sort({ createdAt: -1 });
     }
     if (token.role === "user") {
-      tickets = await TicketModel.find({ createdBy: token.userId })
-        .populate("assignedTo", ["email", "_id"])
-        .sort({ createdAt: -1 });
+      tickets = await TicketModel.find({ createdBy: token._id })
     }
     if (tickets.length === 0) {
       return NextResponse.json(

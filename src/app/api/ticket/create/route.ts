@@ -6,14 +6,21 @@ import { getToken } from "next-auth/jwt";
 
 export const POST = async (req: NextRequest) => {
   try {
-    const token = await getToken({ req });
-    if (!token || !token.userId) {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (!token) {
       return new Response(
         JSON.stringify({ success: false, error: "Unauthorized" }),
         { status: 401 },
       );
     }
-    const userId = token.userId;
+    console.log(token);
+    const userId = token._id;
+    if (!userId) {
+      return new Response(
+        JSON.stringify({ success: false, error: "User ID not found" }),
+        { status: 400 },
+      );
+    }
     await dbConnect(); // Ensure the database is connected
     const { title, description } = await req.json();
 

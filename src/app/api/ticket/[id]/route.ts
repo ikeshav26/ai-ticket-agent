@@ -37,7 +37,7 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
       // If the user is a regular user, only return their own tickets
       const foundTicket = await TicketModel.findOne({
         _id: id,
-        createdBy: token.userId,
+        createdBy: token._id,
       }).select("title description status createdAt");
       if (!foundTicket) {
         return new Response(
