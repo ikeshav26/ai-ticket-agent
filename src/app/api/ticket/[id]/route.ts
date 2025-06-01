@@ -8,7 +8,7 @@ export const GET = async (
   { params }: { params: { id: string } },
 ) => {
   try {
-    const { id } = params; // Extract the ticket ID from the request parameters
+    const { id } = await params; // Extract the ticket ID from the request parameters
     if (!id) {
       return new Response(
         JSON.stringify({ success: false, error: "Ticket ID is required" }),
