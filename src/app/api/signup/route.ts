@@ -9,9 +9,11 @@ import UserModel from "@/models/User";
 export async function POST(request: NextRequest) {
   const { email, password, skills = [] } = await request.json();
   if (!email || !password) {
-    return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Email and password are required" },
+      { status: 400 },
+    );
   }
-
 
   try {
     console.log("Received signup request:", { email, skills });

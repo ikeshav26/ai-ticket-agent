@@ -23,7 +23,7 @@ export default function SignupPage() {
         form,
         {
           withCredentials: true,
-        }
+        },
       );
 
       if (res.status === 201 || res.status === 200) {

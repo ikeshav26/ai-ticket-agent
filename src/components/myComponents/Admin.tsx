@@ -57,7 +57,7 @@ export default function AdminPanel() {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
     setFilteredUsers(
-      users.filter((user) => user.email.toLowerCase().includes(query))
+      users.filter((user) => user.email.toLowerCase().includes(query)),
     );
   };
 

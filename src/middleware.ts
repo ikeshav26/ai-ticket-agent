@@ -28,25 +28,12 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
   } else {
-    if (
-      url.pathname === "/sign-in" ||
-      url.pathname === "/sign-up"
-    ) {
-      return NextResponse.redirect(
-        new URL("/", request.url),
-      );
+    if (url.pathname === "/sign-in" || url.pathname === "/sign-up") {
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 }
 
-
 export const config = {
-  matcher: [
-    "/",
-    "/sign-up",
-    "/sign-in",
-    "/tickets/:path*",
-    "/admin/:path*",
-
-  ],
+  matcher: ["/", "/sign-up", "/sign-in", "/tickets/:path*", "/admin/:path*"],
 };

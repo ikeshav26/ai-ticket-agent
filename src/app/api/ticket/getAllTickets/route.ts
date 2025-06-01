@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest) => {
         .sort({ createdAt: -1 });
     }
     if (token.role === "user") {
-      tickets = await TicketModel.find({ createdBy: token._id })
+      tickets = await TicketModel.find({ createdBy: token._id });
     }
     if (tickets.length === 0) {
       return NextResponse.json(

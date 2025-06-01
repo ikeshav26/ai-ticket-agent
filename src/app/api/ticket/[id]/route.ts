@@ -3,7 +3,10 @@ import TicketModel, { ITicket } from "@/models/Ticket";
 import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const GET = async (
+  req: NextRequest,
+  { params }: { params: { id: string } },
+) => {
   try {
     const { id } = params; // Extract the ticket ID from the request parameters
     if (!id) {
