@@ -51,51 +51,40 @@ export default function TicketDetailsPage({ id }: { id?: string }) {
   if (!ticket) return <div className="text-center mt-10">Ticket not found</div>;
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Ticket Details</h2>
-
-      <div className="card bg-gray-800 shadow p-4 space-y-4">
-        <h3 className="text-xl font-semibold">{ticket.title}</h3>
-        <p>{ticket.description}</p>
-
-        {ticket.status && (
-          <>
-            <div className="divider">Metadata</div>
-            <p>
-              <strong>Status:</strong> {ticket.status}
-            </p>
-            {ticket.priority && (
-              <p>
-                <strong>Priority:</strong> {ticket.priority}
-              </p>
-            )}
-            {Array.isArray(ticket.relatedSkills) &&
-              ticket.relatedSkills.length > 0 && (
-                <p>
-                  <strong>Related Skills:</strong>{" "}
-                  {ticket.relatedSkills.join(", ")}
-                </p>
-              )}
-            {ticket.helpfulNotes && (
-              <div>
-                <strong>Helpful Notes:</strong>
-                <div className="prose max-w-none rounded mt-2">
-                  <ReactMarkdown>{ticket.helpfulNotes}</ReactMarkdown>
-                </div>
-              </div>
-            )}
-            {ticket.assignedTo && (
-              <p>
-                <strong>Assigned To:</strong> {ticket.assignedTo.email}
-              </p>
-            )}
-            {ticket.createdAt && (
-              <p className="text-sm text-gray-500 mt-2">
-                Created At: {new Date(ticket.createdAt).toLocaleString()}
-              </p>
-            )}
-          </>
-        )}
+    <div className="ticketContainer w-full min-h-screen pt-25 flex items-center justify-center">
+      <div className="bg-red-400 w-[60%] h-[70vh] flex flex-col items-center justify-center">
+        <div className="flex flex-col gap-3">
+          <h1>Ticket #{ticket._id.slice(-4)}</h1>
+          <p>Description : {ticket.title || "NA"}</p>
+        </div>
+        <div>
+          <h1>Ticket details</h1>
+        </div>
+         <div>
+          <p>{ticket.description}</p>
+         </div>
+        <div>
+          <p>
+            <span>Status</span>
+            <span>{ticket.status || "NA"}</span>
+          </p>
+          <p>
+            <span>Priority</span>
+            <span>{ticket.priority || "NA"}</span>
+          </p>
+        </div>
+        <div>
+          <p>
+            <span>Created At</span>
+            <span>{ticket.createdAt
+                ? new Date(ticket.createdAt).toLocaleString()
+                : "N/A"}</span>
+          </p>
+          <p>
+            <span>Assigned To</span>
+            <span>{ticket.assignedTo?.email || "NA"}</span>
+          </p>
+        </div>
       </div>
     </div>
   );

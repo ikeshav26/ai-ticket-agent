@@ -41,7 +41,7 @@ export const GET = async (
       const foundTicket = await TicketModel.findOne({
         _id: id,
         createdBy: token._id,
-      }).select("title description status createdAt");
+      }).select("title description status createdAt priority" ).populate("assignedTo", ["email", "_id"]);
       if (!foundTicket) {
         return new Response(
           JSON.stringify({ success: false, error: "Ticket not found" }),
