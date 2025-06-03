@@ -84,8 +84,8 @@ export default function Tickets() {
             </div>
           </form>
         </div>
-        <div className=" w-[90%] md:w-[60%]  overflow-y-auto  max-h-[80vh]">
-          <div className="flex items-center justify-between  p-4 border-2">
+        <div className=" w-[90%] md:w-[60%]  overflow-y-auto scrollbar-hide  max-h-[80vh]">
+          <div className="flex items-center justify-between  p-4 border-3">
             <h3 className="font-bold text-xl">Ticket ID</h3>
             <h3 className="font-bold text-xl">Title</h3>
             <h3 className="font-bold text-xl">Created At</h3>
