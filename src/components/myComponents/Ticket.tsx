@@ -52,37 +52,40 @@ export default function TicketDetailsPage({ id }: { id?: string }) {
 
   return (
     <div className="ticketContainer w-full min-h-screen pt-25 flex items-center justify-center">
-      <div className="bg-red-400 w-[60%] h-[70vh] flex flex-col items-center justify-center">
+      <div className="border-2 rounded-xl w-[90%] md:w-[60%] h-[80vh] md:h-[70vh] flex flex-col items-start justify-center gap-5 p-10 md:p-16 ">
         <div className="flex flex-col gap-3">
-          <h1>Ticket #{ticket._id.slice(-4)}</h1>
-          <p>Description : {ticket.title || "NA"}</p>
+          <h1 className="text-3xl md:text-5xl font-bold">Ticket #{ticket._id.slice(-4)}</h1>
+          <p className="text-xl md:text-3xl font-semibold capitalize">Title : {ticket.title || "NA"}</p>
         </div>
         <div>
-          <h1>Ticket details</h1>
+          <h1 className="text-sm md:text-lg">Ticket details</h1>
         </div>
-         <div>
-          <p>{ticket.description}</p>
+         <div className="border-t-2 w-full pt-2">
+          <p className="flex flex-col items-center justify-center gap-2">
+            <span className="font-bold text-xl ">Description</span>
+            <span className="capitalize text-sm md:text-lg">{ticket.description}</span>
+          </p>
          </div>
-        <div>
-          <p>
-            <span>Status</span>
-            <span>{ticket.status || "NA"}</span>
+        <div className="border-t-2 w-full flex items-center justify-between pt-2">
+          <p className="flex flex-col items-center justify-center gap-2">
+            <span className="font-bold text-lg md:text-xl">Status</span>
+            <span className="text-sm md:text-lg">{ticket.status || "NA"}</span>
           </p>
-          <p>
-            <span>Priority</span>
-            <span>{ticket.priority || "NA"}</span>
+          <p className="flex flex-col items-center justify-center gap-2">
+            <span className="font-bold text-lg md:text-xl">Priority</span>
+            <span className="text-sm md:text-lg">{ticket.priority || "NA"}</span>
           </p>
         </div>
-        <div>
-          <p>
-            <span>Created At</span>
-            <span>{ticket.createdAt
+        <div className="border-t-2 w-full flex items-center justify-between pt-2">
+          <p className="flex flex-col items-center justify-center gap-2">
+            <span className="font-bold text-lg md:text-xl">Created At</span>
+            <span className="text-sm md:text-lg w-20 md:w-auto">{ticket.createdAt
                 ? new Date(ticket.createdAt).toLocaleString()
                 : "N/A"}</span>
           </p>
-          <p>
-            <span>Assigned To</span>
-            <span>{ticket.assignedTo?.email || "NA"}</span>
+          <p className="flex flex-col items-center justify-center gap-2">
+            <span className="font-bold md:text-xl text-lg">Assigned To</span>
+            <span className="text-sm md:text-lg">{ticket.assignedTo?.email || "NA"}</span>
           </p>
         </div>
       </div>

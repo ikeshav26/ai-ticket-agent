@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -13,6 +14,7 @@ export default function Navbar() {
   const logout = async () => {
     await signOut({ redirect: false });
     router.push("/signin");
+    toast.success("Logged out successfully");
   };
 
   if (status === "loading") {
