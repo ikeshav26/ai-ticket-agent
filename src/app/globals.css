@@ -1,2 +1,70 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.theme-light {
+  --bg-color: #eae8e1;
+  --text-color: #1e1e1e;
+  /* Add more variables or rules as needed */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.theme-dark {
+  --bg-color: #1e1e1e;
+  --text-color: #eae8e1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Example for buttons */
+.theme-light .btn-admin {
+  background: #1e1e1e;
+  color: #eae8e1;
+}
+.theme-dark .btn-admin {
+  background: #eae8e1;
+  color: #1e1e1e;
+}
+
+/* For main div background and text color based on data-theme */
+[data-theme="light"] .signupMain , [data-theme="light"] .ticketContainer  {
+  --bg-color: #eae8e1;
+  --text-color: #1e1e1e;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .signupMain , [data-theme="dark"] .ticketContainer {
+  --bg-color: #1e1e1e;
+  --text-color: #eae8e1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+[data-theme="light"] .bttn {
+  --bg-color: #3D3D05;
+  --text-color: #eae8e1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .bttn {
+  --bg-color: #212629;
+  --text-color: #eae8e1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+[data-theme="light"] .input {
+  --bg-color: #F5F5F0;
+  --text-color: #3d3d05;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .input {
+  --bg-color: #2E3030;
+  --text-color: #ababad;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
