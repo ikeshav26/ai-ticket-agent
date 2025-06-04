@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+
+
 .theme-light {
   --bg-color: #eae8e1;
   --text-color: #1e1e1e;
@@ -26,12 +28,18 @@
   color: #1e1e1e;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; 
+}
+
 /* For main div background and text color based on data-theme */
 [data-theme="light"] .signupMain , [data-theme="light"] .ticketContainer  {
-  --bg-color: #eae8e1;
-  --text-color: #1e1e1e;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background: repeating-linear-gradient(45deg, var(--bg-color, rgb(237, 238, 241)), var(--bg-color, rgb(237, 238, 241)) 1px, transparent 1px, transparent 4px);
+
 }
 
 [data-theme="dark"] .signupMain , [data-theme="dark"] .ticketContainer {
@@ -68,3 +76,4 @@
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+
