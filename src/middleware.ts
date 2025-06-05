@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
-export { default } from "next-auth/middleware";
+import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
@@ -9,31 +8,26 @@ export async function middleware(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  const url = request.nextUrl;
+  const { pathname } = request.nextUrl;
 
+  // If user is not authenticated and tries to access a protected route
   if (!token) {
     if (
-      url.pathname.startsWith("/tickets") ||
-      url.pathname.startsWith("/admin") ||
-      url.pathname.startsWith("/")
+      pathname.startsWith("/tickets") ||
+      pathname.startsWith("/admin") ||
+      pathname === "/"
     ) {
       return NextResponse.redirect(new URL("/signin", request.url));
     }
-    // Allow access to public pages
-    else
-      /*if (
-      url.pathname === "/signin" ||
-      url.pathname === "/signup" ||
-      url.pathname.startsWith("/api/")
-    ) */
-    {
-      return NextResponse.next();
-    }
-  } else {
-    if (url.pathname === "/signin" || url.pathname === "/signup") {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+    return NextResponse.next(); // Allow access to public routes
   }
+
+  // If user is authenticated and tries to access signin or signup
+  if (token && (pathname === "/signin" || pathname === "/signup")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  return NextResponse.next(); // Allow access
 }
 
 export const config = {
