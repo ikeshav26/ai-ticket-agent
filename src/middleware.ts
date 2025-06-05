@@ -21,19 +21,19 @@ export async function middleware(request: NextRequest) {
     }
     // Allow access to public pages
     else if (
-      url.pathname === "/sign-in" ||
-      url.pathname === "/sign-up" ||
+      url.pathname === "/signin" ||
+      url.pathname === "/signup" ||
       url.pathname.startsWith("/api/")
     ) {
       return NextResponse.next();
     }
   } else {
-    if (url.pathname === "/sign-in" || url.pathname === "/sign-up") {
+    if (url.pathname === "/signin" || url.pathname === "/signup") {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
 }
 
 export const config = {
-  matcher: ["/", "/sign-up", "/sign-in", "/tickets/:path*", "/admin/:path*"],
+  matcher: ["/", "/signup", "/signin", "/tickets/:path*", "/admin/:path*"],
 };
