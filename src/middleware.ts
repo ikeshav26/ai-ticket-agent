@@ -20,11 +20,13 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/signin", request.url));
     }
     // Allow access to public pages
-    else if (
+    else
+      /*if (
       url.pathname === "/signin" ||
       url.pathname === "/signup" ||
       url.pathname.startsWith("/api/")
-    ) {
+    ) */
+    {
       return NextResponse.next();
     }
   } else {
