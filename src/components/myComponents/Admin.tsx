@@ -62,20 +62,22 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10">
+    <div className="dashboard min-h-screen w-full pt-20 ">
+      <div className="  mx-auto   max-w-4xl">
       <h1 className="text-2xl font-bold mb-6">Admin Panel - Manage Users</h1>
       <input
         type="text"
-        className="input input-bordered w-full mb-6"
+        className="input input-bordered w-full mb-6 focus:outline-none"
         placeholder="Search by email"
         value={searchQuery}
         onChange={handleSearch}
       />
 
-      {filteredUsers.map((user) => (
+      <div className="p-4">
+        {filteredUsers.map((user) => (
         <div
           key={user._id}
-          className="bg-base-100 shadow rounded p-4 mb-4 border"
+          className=" shadow rounded p-4 mb-4 border "
         >
           <p>
             <strong>Email:</strong> {user.email}
@@ -93,13 +95,13 @@ export default function AdminPanel() {
           {editingUser === user.email ? (
             <div className="mt-4 space-y-2">
               <select
-                className="select select-bordered w-full"
+                className="select select-bordered w-full focus:outline-none "
                 value={formData.role}
                 onChange={(e) =>
                   setFormData({ ...formData, role: e.target.value })
                 }
               >
-                <option value="user">User</option>
+                <option className="focus:bg-red-400" value="user">User</option>
                 <option value="moderator">Moderator</option>
                 <option value="admin">Admin</option>
               </select>
@@ -107,7 +109,7 @@ export default function AdminPanel() {
               <input
                 type="text"
                 placeholder="Comma-separated skills"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full focus:outline-none"
                 value={formData.skills}
                 onChange={(e) =>
                   setFormData({ ...formData, skills: e.target.value })
@@ -116,13 +118,13 @@ export default function AdminPanel() {
 
               <div className="flex gap-2">
                 <button
-                  className="btn btn-success btn-sm"
+                  className="bttn py-2 px-4 rounded-full cursor-pointer btn-success btn-sm"
                   onClick={handleUpdate}
                 >
                   Save
                 </button>
                 <button
-                  className="btn btn-ghost btn-sm"
+                  className="bttn py-2 px-4 rounded-full cursor-pointer btn-ghost btn-sm"
                   onClick={() => setEditingUser(null)}
                 >
                   Cancel
@@ -131,7 +133,7 @@ export default function AdminPanel() {
             </div>
           ) : (
             <button
-              className="btn btn-primary btn-sm mt-2"
+              className="bttn py-2 px-4 rounded-full cursor-pointer btn-primary btn-sm mt-2"
               onClick={() => handleEditClick(user)}
             >
               Edit
@@ -139,6 +141,8 @@ export default function AdminPanel() {
           )}
         </div>
       ))}
+      </div>
+    </div>
     </div>
   );
 }

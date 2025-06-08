@@ -77,3 +77,31 @@
   color: var(--text-color);
 }
 
+
+[data-theme="light"] .dashboard {
+  --bg-color: #eae8e1;
+  --text-color: #1e1e1e;
+  background: repeating-linear-gradient(45deg, var(--bg-color, rgb(237, 238, 241)), var(--bg-color, rgb(237, 238, 241)) 1px, transparent 1px, transparent 4px);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .dashboard {
+  --bg-color: #1e1e1e;
+  --text-color: #eae8e1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+[data-theme="light"] .select {
+  --bg-color: #eae8e1;
+  --text-color: #1e1e1e;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .select {
+  --bg-color: #1e1e1e;
+  --text-color: #eae8e1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
